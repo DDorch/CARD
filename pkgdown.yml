@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   V01-climatic_indicators: V01-climatic_indicators.html
   V02-hydrological_indicators: V02-hydrological_indicators.html
-last_built: 2025-04-30T15:21Z
+last_built: 2025-04-30T15:44Z
 urls:
   reference: https://ddorch.github.io/EXstat.CARD/reference
   article: https://ddorch.github.io/EXstat.CARD/articles
