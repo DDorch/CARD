@@ -16,6 +16,10 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/V01-climatic_indicators.html">Calculation of climatic indicators</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -157,7 +161,378 @@ Default <code>NULL</code> to conserve the value specified in the CARDs used.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ddorch.github.io/EXstat.CARD/">EXstat.CARD</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get all the available variables</span></span></span>
+<span class="r-in"><span><span class="va">metaEX_all</span> <span class="op">=</span> <span class="fu"><a href="CARD_list_all.html">CARD_list_all</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">metaEX_all</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 565 × 20</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    variable_en       unit_en name_en description_en method_en sampling_period_en</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ETPA              mm      Cumula… <span style="color: #949494;">""</span>             <span style="color: #949494;">""</span>        09-01, 08-31      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> BFI_Wal           withou… Basefl… <span style="color: #949494;">"</span>Ratio betwee… <span style="color: #949494;">"</span>1. no t… <span style="color: #BB0000;">NA</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> BFM               withou… Basefl… <span style="color: #949494;">""</span>             <span style="color: #949494;">"</span>1. no t… <span style="color: #BB0000;">NA</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> delta{BFI}_LH_H1  withou… Change… <span style="color: #949494;">"</span>Ratio betwee… <span style="color: #949494;">"</span>1. no t… <span style="color: #BB0000;">NA</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> delta{BFI}_LH_H2  withou… Change… <span style="color: #949494;">"</span>Ratio betwee… <span style="color: #949494;">"</span>1. no t… <span style="color: #BB0000;">NA</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> delta{BFI}_LH_H3  withou… Change… <span style="color: #949494;">"</span>Ratio betwee… <span style="color: #949494;">"</span>1. no t… <span style="color: #BB0000;">NA</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> delta{BFI}_Wal_H1 withou… Change… <span style="color: #949494;">"</span>Ratio betwee… <span style="color: #949494;">"</span>1. no t… <span style="color: #BB0000;">NA</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> delta{BFI}_Wal_H2 withou… Change… <span style="color: #949494;">"</span>Ratio betwee… <span style="color: #949494;">"</span>1. no t… <span style="color: #BB0000;">NA</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> delta{BFI}_Wal_H3 withou… Change… <span style="color: #949494;">"</span>Ratio betwee… <span style="color: #949494;">"</span>1. no t… <span style="color: #BB0000;">NA</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> delta{centerBF}_… day     Averag… <span style="color: #949494;">"</span>Date when 50… <span style="color: #949494;">"</span>1. annu… 09-01, 08-31      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 555 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more variables: topic_en &lt;chr&gt;, variable_fr &lt;chr&gt;, unit_fr &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   name_fr &lt;chr&gt;, description_fr &lt;chr&gt;, method_fr &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sampling_period_fr &lt;chr&gt;, topic_fr &lt;chr&gt;, source &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   preferred_hydrological_month &lt;int&gt;, is_date &lt;lgl&gt;, to_normalise &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   palette &lt;chr&gt;, script_path &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create mock data</span></span></span>
+<span class="r-in"><span><span class="va">Start</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2001-03-02"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">End</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2024-11-30"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">Date</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html" class="external-link">seq.Date</a></span><span class="op">(</span><span class="va">Start</span>, <span class="va">End</span>, by<span class="op">=</span><span class="st">"day"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>time<span class="op">=</span><span class="va">Date</span>,</span></span>
+<span class="r-in"><span>                     Q<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                     id<span class="op">=</span><span class="st">"serie 1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Do a direct extraction</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">=</span> <span class="fu">CARD_extraction</span><span class="op">(</span><span class="va">data</span>, CARD_name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"QA"</span>, <span class="st">"QMNA"</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Computes QMNA"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Process 1/2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "EXTRACTION PROCESS                                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Missing year                                  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Checking missing continuous periods       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       longer than 10 years                      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Period                                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Selecting all the data                    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Sample period                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Default sample period used                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Fixing sample period                      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Only start of the sample period was   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   given                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Every time series have the same       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   sample period                         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── All : 01 / 30                         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Monthly extraction along years                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Preparing date data for the extraction    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get general sample info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Computing of time indicators for      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   each time serie                       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get number of missing data for start  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   and end                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── Create each group                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Grouping data                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Application of the function                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Cleaning extracted tibble                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Manage possible infinite values           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Recreate a date vector and add value for  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       NApct computing                           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── NA management                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Compute NA percentage                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Removing data if NA percentage is         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   │   strictly above 3 %                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Cleaning NA percentage info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "└── Last cleaning and formating for output        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    ├── Rename column                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    ├── Keeping only the needed data : all        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    └── Return data                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8,675 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    id      time           Q   QMA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> serie 1 2001-03-02 <span style="text-decoration: underline;">11</span>383    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> serie 1 2001-03-03 <span style="text-decoration: underline;">11</span>384    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> serie 1 2001-03-04 <span style="text-decoration: underline;">11</span>385    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> serie 1 2001-03-05 <span style="text-decoration: underline;">11</span>386    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> serie 1 2001-03-06 <span style="text-decoration: underline;">11</span>387    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> serie 1 2001-03-07 <span style="text-decoration: underline;">11</span>388    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> serie 1 2001-03-08 <span style="text-decoration: underline;">11</span>389    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> serie 1 2001-03-09 <span style="text-decoration: underline;">11</span>390    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> serie 1 2001-03-10 <span style="text-decoration: underline;">11</span>391    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> serie 1 2001-03-11 <span style="text-decoration: underline;">11</span>392    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8,665 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Process 2/2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "EXTRACTION PROCESS                                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Period                                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Selecting all the data                    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Sample period                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Fixing sample period for each time series "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Every time series have the same       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   sample period                         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── All : 11-01 / 10-31                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Yearly extraction                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Preparing date data for the extraction    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get general sample info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Computing of time indicators for      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   each time serie                       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get number of missing data for start  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   and end                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── Create each group                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Grouping data                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Application of the function                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Cleaning extracted tibble                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Manage possible infinite values           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Recreate a date vector and add value for  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       NApct computing                           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── NA management                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Compute NA percentage                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Removing data if NA percentage is         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   │   strictly above 3 %                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Cleaning NA percentage info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "└── Last cleaning and formating for output        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    ├── Rename column                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    └── Return data                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    id      time         QMNA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> serie 1 2000-11-01    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> serie 1 2001-11-01 <span style="text-decoration: underline;">11</span>642.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> serie 1 2002-11-01 <span style="text-decoration: underline;">12</span>006.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> serie 1 2003-11-01 <span style="text-decoration: underline;">12</span>372.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> serie 1 2004-11-01 <span style="text-decoration: underline;">12</span>738.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> serie 1 2005-11-01 <span style="text-decoration: underline;">13</span>102.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> serie 1 2006-11-01 <span style="text-decoration: underline;">13</span>468.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> serie 1 2007-11-01 <span style="text-decoration: underline;">13</span>832.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> serie 1 2008-11-01 <span style="text-decoration: underline;">14</span>198.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> serie 1 2009-11-01 <span style="text-decoration: underline;">14</span>564.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Computes QA"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Process 1/1"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "EXTRACTION PROCESS                                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Missing year                                  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Checking missing continuous periods       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       longer than 10 years                      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Period                                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Selecting all the data                    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Sample period                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Fixing sample period                      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Only start of the sample period was   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   given                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Every time series have the same       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   sample period                         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── All : 09-01 / 08-31                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Yearly extraction                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Preparing date data for the extraction    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get general sample info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Computing of time indicators for      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   each time serie                       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get number of missing data for start  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   and end                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── Create each group                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Grouping data                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Application of the function                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Cleaning extracted tibble                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Manage possible infinite values           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Recreate a date vector and add value for  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       NApct computing                           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── NA management                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Compute NA percentage                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Removing data if NA percentage is         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   │   strictly above 3 %                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Cleaning NA percentage info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "└── Last cleaning and formating for output        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    ├── Rename column                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    └── Return data                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    id      time           QA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> serie 1 2000-09-01    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> serie 1 2001-09-01 <span style="text-decoration: underline;">11</span>748 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> serie 1 2002-09-01 <span style="text-decoration: underline;">12</span>113 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> serie 1 2003-09-01 <span style="text-decoration: underline;">12</span>478.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> serie 1 2004-09-01 <span style="text-decoration: underline;">12</span>844 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> serie 1 2005-09-01 <span style="text-decoration: underline;">13</span>209 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> serie 1 2006-09-01 <span style="text-decoration: underline;">13</span>574 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> serie 1 2007-09-01 <span style="text-decoration: underline;">13</span>940.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> serie 1 2008-09-01 <span style="text-decoration: underline;">14</span>305 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> serie 1 2009-09-01 <span style="text-decoration: underline;">14</span>670 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more rows</span></span>
+<span class="r-in"><span><span class="va">res</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $metaEX</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 19</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable_en unit_en      name_en   description_en method_en sampling_period_en</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> QMNA        m^{3}.s^{-1} Annual m… <span style="color: #949494;">""</span>             <span style="color: #949494;">"</span>1. mont… Month of maximum …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> QA          m^{3}.s^{-1} Annual m… <span style="color: #949494;">""</span>             <span style="color: #949494;">"</span>1. annu… 09-01, 08-31      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: topic_en &lt;chr&gt;, variable_fr &lt;chr&gt;, unit_fr &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   name_fr &lt;chr&gt;, description_fr &lt;chr&gt;, method_fr &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sampling_period_fr &lt;chr&gt;, topic_fr &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   preferred_hydrological_month &lt;dbl&gt;, is_date &lt;lgl&gt;, to_normalise &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   palette &lt;chr&gt;, script_path &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dataEX</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dataEX$QMNA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    id      time         QMNA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> serie 1 2000-11-01    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> serie 1 2001-11-01 <span style="text-decoration: underline;">11</span>642.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> serie 1 2002-11-01 <span style="text-decoration: underline;">12</span>006.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> serie 1 2003-11-01 <span style="text-decoration: underline;">12</span>372.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> serie 1 2004-11-01 <span style="text-decoration: underline;">12</span>738.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> serie 1 2005-11-01 <span style="text-decoration: underline;">13</span>102.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> serie 1 2006-11-01 <span style="text-decoration: underline;">13</span>468.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> serie 1 2007-11-01 <span style="text-decoration: underline;">13</span>832.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> serie 1 2008-11-01 <span style="text-decoration: underline;">14</span>198.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> serie 1 2009-11-01 <span style="text-decoration: underline;">14</span>564.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dataEX$QA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    id      time           QA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> serie 1 2000-09-01    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> serie 1 2001-09-01 <span style="text-decoration: underline;">11</span>748 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> serie 1 2002-09-01 <span style="text-decoration: underline;">12</span>113 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> serie 1 2003-09-01 <span style="text-decoration: underline;">12</span>478.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> serie 1 2004-09-01 <span style="text-decoration: underline;">12</span>844 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> serie 1 2005-09-01 <span style="text-decoration: underline;">13</span>209 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> serie 1 2006-09-01 <span style="text-decoration: underline;">13</span>574 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> serie 1 2007-09-01 <span style="text-decoration: underline;">13</span>940.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> serie 1 2008-09-01 <span style="text-decoration: underline;">14</span>305 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> serie 1 2009-09-01 <span style="text-decoration: underline;">14</span>670 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Or find the closest CARD variable that interests you</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="CARD_management.html">CARD_management</a></span><span class="op">(</span>CARD_name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"VCN10-5"</span><span class="op">)</span>, CARD_path<span class="op">=</span><span class="st">"CARD-WIP"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "VCN10-5"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="co"># Personalise it in the created  `"CARD-WIP"` directory (for example change the return period)</span></span></span>
+<span class="r-in"><span><span class="co"># And perform a custom extraction</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">=</span> <span class="fu">CARD_extraction</span><span class="op">(</span><span class="va">data</span>, CARD_name<span class="op">=</span><span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>                      CARD_path<span class="op">=</span><span class="st">"CARD-WIP"</span>,</span></span>
+<span class="r-in"><span>                      verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Computes VCN10-5"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Process 1/3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "EXTRACTION PROCESS                                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Missing year                                  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Checking missing continuous periods       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       longer than 10 years                      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Period                                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Selecting all the data                    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Sample period                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Default sample period used                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Fixing sample period                      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Only start of the sample period was   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   given                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Every time series have the same       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   sample period                         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── All : 01-01 / 12-31                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── None extraction                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Preparing date data for the extraction    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get general sample info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Grouping data                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Application of the function                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Cleaning extracted tibble                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Manage possible infinite values           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Recreate a date vector and add value for  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       NApct computing                           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── NA management                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Compute NA percentage                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Cleaning NA percentage info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "└── Last cleaning and formating for output        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    ├── Rename column                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    ├── Keeping only the needed data : all        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    └── Return data                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8,675 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    id      time           Q   VC10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> serie 1 2001-03-02 <span style="text-decoration: underline;">11</span>383    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> serie 1 2001-03-03 <span style="text-decoration: underline;">11</span>384    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> serie 1 2001-03-04 <span style="text-decoration: underline;">11</span>385    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> serie 1 2001-03-05 <span style="text-decoration: underline;">11</span>386    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> serie 1 2001-03-06 <span style="text-decoration: underline;">11</span>387 <span style="text-decoration: underline;">11</span>388.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> serie 1 2001-03-07 <span style="text-decoration: underline;">11</span>388 <span style="text-decoration: underline;">11</span>388.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> serie 1 2001-03-08 <span style="text-decoration: underline;">11</span>389 <span style="text-decoration: underline;">11</span>390.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> serie 1 2001-03-09 <span style="text-decoration: underline;">11</span>390 <span style="text-decoration: underline;">11</span>390.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> serie 1 2001-03-10 <span style="text-decoration: underline;">11</span>391 <span style="text-decoration: underline;">11</span>392.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> serie 1 2001-03-11 <span style="text-decoration: underline;">11</span>392 <span style="text-decoration: underline;">11</span>392.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8,665 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Process 2/3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "EXTRACTION PROCESS                                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Period                                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Selecting all the data                    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Sample period                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Fixing sample period for each time series "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Every time series have the same       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   sample period                         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── All : 11-01 / 10-31                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Yearly extraction                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Preparing date data for the extraction    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get general sample info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Computing of time indicators for      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   each time serie                       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get number of missing data for start  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   and end                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── Create each group                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Grouping data                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Application of the function                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Cleaning extracted tibble                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Manage possible infinite values           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Recreate a date vector and add value for  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       NApct computing                           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── NA management                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Compute NA percentage                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Removing data if NA percentage is         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   │   strictly above 3 %                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Cleaning NA percentage info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "└── Last cleaning and formating for output        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    ├── Rename column                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    └── Return data                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    id      time        VCN10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> serie 1 2000-11-01    <span style="color: #BB0000;">NA</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> serie 1 2001-11-01 <span style="text-decoration: underline;">11</span>628.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> serie 1 2002-11-01 <span style="text-decoration: underline;">11</span>992.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> serie 1 2003-11-01 <span style="text-decoration: underline;">12</span>358.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> serie 1 2004-11-01 <span style="text-decoration: underline;">12</span>724.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> serie 1 2005-11-01 <span style="text-decoration: underline;">13</span>088.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> serie 1 2006-11-01 <span style="text-decoration: underline;">13</span>454.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> serie 1 2007-11-01 <span style="text-decoration: underline;">13</span>818.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> serie 1 2008-11-01 <span style="text-decoration: underline;">14</span>184.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> serie 1 2009-11-01 <span style="text-decoration: underline;">14</span>550.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Process 3/3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "EXTRACTION PROCESS                                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Period                                        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Selecting all the data                    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Sample period                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Default sample period used                "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Fixing sample period                      "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Only start of the sample period was   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   given                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Every time series have the same       "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       │   sample period                         "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       └── All : 01-01 / 12-31                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── None extraction                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Preparing date data for the extraction    "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       ├── Get general sample info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Grouping data                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Application of the function                   "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── Cleaning extracted tibble                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Manage possible infinite values           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Recreate a date vector and add value for  "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│       NApct computing                           "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "├── NA management                                 "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   ├── Compute NA percentage                     "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "│   └── Cleaning NA percentage info               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "└── Last cleaning and formating for output        "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    ├── Rename column                             "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "    └── Return data                               "</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id      `VCN10-5`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> serie 1    <span style="text-decoration: underline;">13</span>495.</span>
+<span class="r-in"><span><span class="va">res</span><span class="op">$</span><span class="va">dataEX</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`VCN10-5`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id      `VCN10-5`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> serie 1    <span style="text-decoration: underline;">13</span>495.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
