@@ -82,15 +82,15 @@
 
 
 <dt id="arg-card-name">CARD_name<a class="anchor" aria-label="anchor" href="#arg-card-name"></a></dt>
-<dd><p>By default, all CARDs in the <code>CARD_dir</code> directory will be used for the analysis. However, you can specify a <a href="https://rdrr.io/r/base/c.html" class="external-link">vector</a> of <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> strings with the names of the CARDs to be used. Default is <code>"NULL"</code> for using all the CARDs.</p></dd>
+<dd><p>A <a href="https://rdrr.io/r/base/c.html" class="external-link">vector</a> of <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> strings to specify which variables you want to extract. See <code><a href="CARD_list_all.html">CARD_list_all()</a></code> to get the variable names. By default, <code>c("QA", "QJXA")</code>. If <code>NULL</code>, all the variable will be extracted, so avoid this value except with <code>extract_only_metadata = TRUE</code> or your custom <code>CARD_path</code> directory.</p></dd>
 
 
 <dt id="arg-card-path">CARD_path<a class="anchor" aria-label="anchor" href="#arg-card-path"></a></dt>
-<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> string representing the path to the downloaded CARD directory (it should end with <code>"CARD"</code>). In this directory, you can copy and paste (and later modify) CARDs from the <code>"__all__"</code> subdirectory that you want to use for an analysis represented by a subdirectory named <code>CARD_dir</code> (see <code>CARD_tmp</code> if you want to locate your <code>CARD_dir</code> directory elsewhere). In your CARDs, you can specify functions available in the scripts of the <code>"__tools__"</code> subdirectory.</p></dd>
+<dd><p>An optional <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> string for the path where to search for custom CARDs that have been created by the <a href="CARD_management.html">CARD_management</a> function. By default, <code>NULL</code> in order to get the default CARD variable parameters.</p></dd>
 
 
 <dt id="arg-period-default">period_default<a class="anchor" aria-label="anchor" href="#arg-period-default"></a></dt>
-<dd><p>A <a href="https://rdrr.io/r/base/c.html" class="external-link">vector</a> of two <a href="https://rdrr.io/r/base/Dates.html" class="external-link">dates</a> (or two unambiguous <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> strings that can be coerced to <a href="https://rdrr.io/r/base/Dates.html" class="external-link">dates</a>) to restrict the period of analysis. As an example, it can be <code>c("1950-01-01", "2020-12-31")</code> to select data from the 1st January of 1950 to the end of December of 2020. The default option is <code>period=NULL</code>, which considers all available data for each time serie.</p></dd>
+<dd><p>A <a href="https://rdrr.io/r/base/c.html" class="external-link">vector</a> of two <a href="https://rdrr.io/r/base/Dates.html" class="external-link">dates</a> (or two unambiguous <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> strings that can be coerced to <a href="https://rdrr.io/r/base/Dates.html" class="external-link">dates</a>) to restrict the period of analysis. As an example, it can be <code>c("1950-01-01", "2020-12-31")</code> to select data from the 1st January of 1950 to the end of December of 2020. Some CARD can have a specific <code>period</code> parameter that overide this <code>period_default</code> argument. The default option is <code>period_default=NULL</code>, which considers all available data for each time serie.</p></dd>
 
 
 <dt id="arg-suffix">suffix<a class="anchor" aria-label="anchor" href="#arg-suffix"></a></dt>
@@ -139,14 +139,6 @@ Default <code>NULL</code> to conserve the value specified in the CARDs used.</p>
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a>. Should intermediate messages be printed during the execution of the function ? Default <code>FALSE</code>.</p></dd>
 
-
-<dt id="arg-card-tmp">CARD_tmp<a class="anchor" aria-label="anchor" href="#arg-card-tmp"></a></dt>
-<dd><p>If you want to locate the <code>CARD_dir</code> directory somewhere other than in the <code>CARD_path</code> directory, you can specify a <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> string in <code>CARD_tmp</code> for a path where the <code>CARD_dir</code> subdirectory of CARDs will be searched. Default is <code>"NULL"</code> if you want to locate the <code>CARD_dir</code> subdirectory of CARDs in <code>CARD_path</code>.</p></dd>
-
-
-<dt id="arg-card-dir">CARD_dir<a class="anchor" aria-label="anchor" href="#arg-card-dir"></a></dt>
-<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> string for the name of a subdirectory in <code>CARD_path</code> (or <code>CARD_tmp</code>) where the CARD parameterization files are located for an analysis. Default is <code>"WIP"</code>.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -156,61 +148,16 @@ Default <code>NULL</code> to conserve the value specified in the CARDs used.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ol><li><p><code>CARD_download()</code> for downloading last version of CARD parameterization files.</p></li>
-<li><p><code><a href="CARD_list_all.html">CARD_list_all()</a></code> list all available CARD.</p></li>
+<ol><li><p><code><a href="CARD_list_all.html">CARD_list_all()</a></code> list all available CARD.</p></li>
 <li><p><code><a href="CARD_management.html">CARD_management()</a></code> for managing CARD parameterization files.</p></li>
 </ol><ul><li><p></p><ol><li><p><code>CARD_extraction()</code> for extracting variables using CARD.</p></li>
 </ol></li>
-</ul><ol><li><p><code>process_extraction()</code> for extracting variables.</p></li>
-<li><p><code>process_trend()</code> for performing trend analysis on extracted variables.</p></li>
-</ol></div>
+</ul></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Creation of random data set</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">Start</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2000-02-01"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">End</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2010-04-04"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">Date</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html" class="external-link">seq.Date</a></span><span class="op">(</span><span class="va">Start</span>, <span class="va">End</span>, by<span class="op">=</span><span class="st">"day"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># First time serie</span></span></span>
-<span class="r-in"><span><span class="va">data_1</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>time<span class="op">=</span><span class="va">Date</span>,</span></span>
-<span class="r-in"><span>                       X_state1<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>                           <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, <span class="fl">1e4</span>, <span class="fl">1e3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                       X_state2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">1e2</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>                           <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                       id<span class="op">=</span><span class="st">"serie 1"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">data_1</span><span class="op">$</span><span class="va">X_state2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">data_1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Second time serie</span></span></span>
-<span class="r-in"><span><span class="va">data_2</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>time<span class="op">=</span><span class="va">Date</span>,</span></span>
-<span class="r-in"><span>                       X_state1<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>                           <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, <span class="fl">1e4</span>, <span class="fl">1e3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                       X_state2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">1e2</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>                           <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                       id<span class="op">=</span><span class="st">"serie 2"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">data_2</span><span class="op">$</span><span class="va">X_state2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">data_2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Final data for testing</span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">data_1</span>, <span class="va">data_2</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Extraction with CARD</span></span></span>
-<span class="r-in"><span><span class="co"># Copy and paste CARD from __all__ to the CARD_dir directory (or</span></span></span>
-<span class="r-in"><span><span class="co"># use CARD_tmp with CARD_management function) and then process the</span></span></span>
-<span class="r-in"><span><span class="co"># extraction</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="fu">CARD_extraction</span><span class="op">(</span><span class="va">data</span>,</span></span>
-<span class="r-in"><span>                CARD_path<span class="op">=</span><span class="st">"path/to/CARD"</span>,</span></span>
-<span class="r-in"><span>                CARD_tmp<span class="op">=</span><span class="st">"path/to/temporary"</span>,</span></span>
-<span class="r-in"><span>                CARD_dir<span class="op">=</span><span class="st">"WIP"</span>,</span></span>
-<span class="r-in"><span>                period_default<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1950-01-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                simplify<span class="op">=</span><span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>                cancel_lim<span class="op">=</span><span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>                verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
