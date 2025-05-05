@@ -69,7 +69,7 @@ statistical indicators only related to flow data (indicator evolving
 precipitation and comparison between observed and simulated flows are
 excluded).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ddorch.github.io/EXstat.CARD/">EXstat.CARD</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://louis-heraut.github.io/CARD/">CARD</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: EXstat</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gitlab.irstea.fr/HYCAR-Hydro/airgrgalaxy/airgrdatasets" class="external-link">airGRdatasets</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -121,7 +121,8 @@ list of available indicators.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metaEX_all</span> <span class="op">=</span> <span class="fu"><a href="../reference/CARD_list_all.html">CARD_list_all</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">metaEX_all</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [565 × 20] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [565 × 22] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ CARD_name                   : chr [1:565] "ETPA" "BFI_Wal" "BFM" "delta{BFI}_LH_H1" ...</span></span>
 <span><span class="co">#&gt;  $ variable_en                 : chr [1:565] "ETPA" "BFI_Wal" "BFM" "delta{BFI}_LH_H1" ...</span></span>
 <span><span class="co">#&gt;  $ unit_en                     : chr [1:565] "mm" "without unit" "without unit" "without unit" ...</span></span>
 <span><span class="co">#&gt;  $ name_en                     : chr [1:565] "Cumulative annual evapotranspiration" "Baseflow index" "Baseflow magnitude" "Change of baseflow index between the near horizon and historical period (Lyne and Hollick)" ...</span></span>
@@ -136,6 +137,7 @@ list of available indicators.</p>
 <span><span class="co">#&gt;  $ method_fr                   : chr [1:565] "" "1. aucune agrégation temporelle - extraction du débit de base (Wallingford)\n2. aucune agrégation temporelle - calcul du BFI" "1. aucune agrégation temporelle - extraction du débit de base (Wallingford)\n2. agrégation par jour de l’année "| __truncated__ "1. aucune agrégation temporelle - extraction du débit de base (Lyne et Hollick)\n2. aucune agrégation temporell"| __truncated__ ...</span></span>
 <span><span class="co">#&gt;  $ sampling_period_fr          : chr [1:565] "01-09, 31-08" NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ topic_fr                    : chr [1:565] "Évapotranspiration, Moyenne, Intensité" "Débit, Débit de Base, Intensité" "Débit, Débit de Base, Intensité" "Débit, Débit de Base, Intensité" ...</span></span>
+<span><span class="co">#&gt;  $ input_vars                  : chr [1:565] "ETP" "Q" "Q" "Q" ...</span></span>
 <span><span class="co">#&gt;  $ source                      : chr [1:565] NA "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ NA ...</span></span>
 <span><span class="co">#&gt;  $ preferred_hydrological_month: int [1:565] NA NA NA NA NA NA NA NA NA 9 ...</span></span>
 <span><span class="co">#&gt;  $ is_date                     : logi [1:565] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
@@ -632,27 +634,28 @@ median flow</td>
 <span><span class="co">#&gt; 'keep' seems to only select aggragated column. Thus, 'keep' will be coherced to NULL.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">res_flow</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
-<span><span class="co">#&gt;  $ metaEX: tibble [73 × 20] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;   ..$ variable_en                 : chr [1:73] "BFI_Wal" "BFM" "med{centerBF}" "med{dtBF}" ...</span></span>
-<span><span class="co">#&gt;   ..$ unit_en                     : chr [1:73] "without unit" "without unit" "yearday" "day" ...</span></span>
-<span><span class="co">#&gt;   ..$ name_en                     : chr [1:73] "Baseflow index" "Baseflow magnitude" "Median center of baseflow" "Median duration of baseflow" ...</span></span>
-<span><span class="co">#&gt;   ..$ description_en              : chr [1:73] "Ratio between mean inter-annual base flow and mean inter-annual flow" "" "Median of the dates at which 50 % of the annual cumulative baseflow is reached" "Median of the durations between the start and end of baseflow" ...</span></span>
-<span><span class="co">#&gt;   ..$ method_en                   : chr [1:73] "1. no temporal aggregation - extraction of the base flow (Wallingford)\n2. no temporal aggregation - calculatio"| __truncated__ "1. no temporal aggregation - extraction of the base flow (Wallingford)\n2. aggregation by day of the year - ave"| __truncated__ "1. annual aggregation [09-01, 08-31] - date at which the baseflow (Wallingford) sum Qb (Section 8.6.2) correspo"| __truncated__ "1. annual aggregation [09-01, 08-31] - number of days between the dates at which the baseflow (Wallingford) sum"| __truncated__ ...</span></span>
-<span><span class="co">#&gt;   ..$ topic_en                    : chr [1:73] "Flow, Base Flow, Intensity" "Flow, Base Flow, Intensity" "Flow, Baseflow, Seasonality" "Flow, Baseflow, Duration" ...</span></span>
-<span><span class="co">#&gt;   ..$ variable_fr                 : chr [1:73] "BFI_Wal" "BFM" "med{centreQB}" "med{dtQB}" ...</span></span>
-<span><span class="co">#&gt;   ..$ unit_fr                     : chr [1:73] "sans unité" "sans unité" "jour de l'année" "jour" ...</span></span>
-<span><span class="co">#&gt;   ..$ name_fr                     : chr [1:73] "Indice de débit de base" "Magnitude du débit de base" "Médiane du centre des écoulements lents" "Médiane de la durée des écoulements lents" ...</span></span>
-<span><span class="co">#&gt;   ..$ description_fr              : chr [1:73] "Rapport entre débit de base moyen inter-annuel et débit moyen inter-annuel" "" "Médiane des dates à laquelle 50 % du cumul annuel du débit de base sont atteints" "Médiane des durées entre le début et la fin des écoulements lents" ...</span></span>
-<span><span class="co">#&gt;   ..$ method_fr                   : chr [1:73] "1. aucune agrégation temporelle - extraction du débit de base (Wallingford)\n2. aucune agrégation temporelle - calcul du BFI" "1. aucune agrégation temporelle - extraction du débit de base (Wallingford)\n2. agrégation par jour de l’année "| __truncated__ "1. agrégation annuelle [01-09, 31-08] - date à laquelle la somme du débit de base (Wallingford) Qb (Section 8.6"| __truncated__ "1. agrégation annuelle [01-09, 31-08] - nombre de jours entre les dates auxquelles la somme du débit de base (W"| __truncated__ ...</span></span>
-<span><span class="co">#&gt;   ..$ topic_fr                    : chr [1:73] "Débit, Débit de Base, Intensité" "Débit, Débit de Base, Intensité" "Débit, Débit de Base, Saisonnalité" "Débit, Débit de Base, Durée" ...</span></span>
-<span><span class="co">#&gt;   ..$ source                      : chr [1:73] "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ ...</span></span>
-<span><span class="co">#&gt;   ..$ preferred_hydrological_month: num [1:73] NA NA 9 9 9 9 9 NA 9 9 ...</span></span>
-<span><span class="co">#&gt;   ..$ is_date                     : logi [1:73] FALSE FALSE TRUE FALSE TRUE TRUE ...</span></span>
-<span><span class="co">#&gt;   ..$ to_normalise                : logi [1:73] FALSE FALSE FALSE TRUE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;   ..$ script_path                 : chr [1:73] "Flow/Baseflow/criteria/BFI_Wal.R" "Flow/Baseflow/criteria/BFM.R" "Flow/Baseflow/criteria/med{centerBF}.R" "Flow/Baseflow/criteria/med{dtBF}.R" ...</span></span>
-<span><span class="co">#&gt;   ..$ sampling_period_en          : chr [1:73] NA NA "09-01, 08-31" "09-01, 08-31" ...</span></span>
-<span><span class="co">#&gt;   ..$ sampling_period_fr          : chr [1:73] NA NA "01-09, 31-08" "01-09, 31-08" ...</span></span>
-<span><span class="co">#&gt;   ..$ palette                     : chr [1:73] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ metaEX: tibble [73 × 21] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   ..$ variable_en              : chr [1:73] "BFI_Wal" "BFM" "med{centerBF}" "med{dtBF}" ...</span></span>
+<span><span class="co">#&gt;   ..$ unit_en                  : chr [1:73] "without unit" "without unit" "yearday" "day" ...</span></span>
+<span><span class="co">#&gt;   ..$ name_en                  : chr [1:73] "Baseflow index" "Baseflow magnitude" "Median center of baseflow" "Median duration of baseflow" ...</span></span>
+<span><span class="co">#&gt;   ..$ description_en           : chr [1:73] "Ratio between mean inter-annual base flow and mean inter-annual flow" "" "Median of the dates at which 50 % of the annual cumulative baseflow is reached" "Median of the durations between the start and end of baseflow" ...</span></span>
+<span><span class="co">#&gt;   ..$ method_en                : chr [1:73] "1. no temporal aggregation - extraction of the base flow (Wallingford)\n2. no temporal aggregation - calculatio"| __truncated__ "1. no temporal aggregation - extraction of the base flow (Wallingford)\n2. aggregation by day of the year - ave"| __truncated__ "1. annual aggregation [09-01, 08-31] - date at which the baseflow (Wallingford) sum Qb (Section 8.6.2) correspo"| __truncated__ "1. annual aggregation [09-01, 08-31] - number of days between the dates at which the baseflow (Wallingford) sum"| __truncated__ ...</span></span>
+<span><span class="co">#&gt;   ..$ topic_en                 : chr [1:73] "Flow, Base Flow, Intensity" "Flow, Base Flow, Intensity" "Flow, Baseflow, Seasonality" "Flow, Baseflow, Duration" ...</span></span>
+<span><span class="co">#&gt;   ..$ variable_fr              : chr [1:73] "BFI_Wal" "BFM" "med{centreQB}" "med{dtQB}" ...</span></span>
+<span><span class="co">#&gt;   ..$ unit_fr                  : chr [1:73] "sans unité" "sans unité" "jour de l'année" "jour" ...</span></span>
+<span><span class="co">#&gt;   ..$ name_fr                  : chr [1:73] "Indice de débit de base" "Magnitude du débit de base" "Médiane du centre des écoulements lents" "Médiane de la durée des écoulements lents" ...</span></span>
+<span><span class="co">#&gt;   ..$ description_fr           : chr [1:73] "Rapport entre débit de base moyen inter-annuel et débit moyen inter-annuel" "" "Médiane des dates à laquelle 50 % du cumul annuel du débit de base sont atteints" "Médiane des durées entre le début et la fin des écoulements lents" ...</span></span>
+<span><span class="co">#&gt;   ..$ method_fr                : chr [1:73] "1. aucune agrégation temporelle - extraction du débit de base (Wallingford)\n2. aucune agrégation temporelle - calcul du BFI" "1. aucune agrégation temporelle - extraction du débit de base (Wallingford)\n2. agrégation par jour de l’année "| __truncated__ "1. agrégation annuelle [01-09, 31-08] - date à laquelle la somme du débit de base (Wallingford) Qb (Section 8.6"| __truncated__ "1. agrégation annuelle [01-09, 31-08] - nombre de jours entre les dates auxquelles la somme du débit de base (W"| __truncated__ ...</span></span>
+<span><span class="co">#&gt;   ..$ topic_fr                 : chr [1:73] "Débit, Débit de Base, Intensité" "Débit, Débit de Base, Intensité" "Débit, Débit de Base, Saisonnalité" "Débit, Débit de Base, Durée" ...</span></span>
+<span><span class="co">#&gt;   ..$ input_vars               : chr [1:73] "Q" "Q" "Q" "Q" ...</span></span>
+<span><span class="co">#&gt;   ..$ source                   : chr [1:73] "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ "TALLAKSEN, L. et H. VAN LANEN, éd. (2004). Hydrological drought. Processes and estimation methods for streamflo"| __truncated__ ...</span></span>
+<span><span class="co">#&gt;   ..$ preferred_sampling_period: chr [1:73] NA NA "09-01" "09-01" ...</span></span>
+<span><span class="co">#&gt;   ..$ is_date                  : logi [1:73] FALSE FALSE TRUE FALSE TRUE TRUE ...</span></span>
+<span><span class="co">#&gt;   ..$ to_normalise             : logi [1:73] FALSE FALSE FALSE TRUE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ script_path              : chr [1:73] "Flow/Baseflow/criteria/BFI_Wal.R" "Flow/Baseflow/criteria/BFM.R" "Flow/Baseflow/criteria/med{centerBF}.R" "Flow/Baseflow/criteria/med{dtBF}.R" ...</span></span>
+<span><span class="co">#&gt;   ..$ sampling_period_en       : chr [1:73] NA NA "09-01, 08-31" "09-01, 08-31" ...</span></span>
+<span><span class="co">#&gt;   ..$ sampling_period_fr       : chr [1:73] NA NA "01-09, 31-08" "01-09, 31-08" ...</span></span>
+<span><span class="co">#&gt;   ..$ palette                  : chr [1:73] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ dataEX:List of 73</span></span>
 <span><span class="co">#&gt;   ..$ BFI_Wal      : tibble [3 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;   .. ..$ id     : chr [1:3] "E645651001" "K134181001" "K265401001"</span></span>
